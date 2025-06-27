@@ -8,15 +8,44 @@
   <link href="https://fonts.googleapis.com/css2?family=Fredoka:wght@400;600&display=swap" rel="stylesheet">
 </head>
 <body>
+  <!-- Floating Rules Button -->
+<div class="rules-float">
+  <button id="toggleRules" class="rules-button" onclick="toggleRules()">❓ Rules</button>
+  <div id="rulesPanel" class="rules-panel hidden">
+    <h3>📜 Game Rules</h3>
+    <ul>
+      <li>Each player starts with 3 numbered cells.</li>
+      <li>Click your number to begin a move.</li>
+      <li>You may place +1 in any empty adjacent cell.</li>
+      <li>Take turns until the board is full.</li>
+      <li>Whoever places the highest number wins!</li>
+    </ul>
+  </div>
+</div>
+
   <div class="container">
-    <h1 class="title">🧮 Sequencium</h1>
-    <p id="status" class="status">🔴 Red's turn: Place two successors</p>
-    
+  <h1 class="title">🧮 Sequencium</h1>
+  <p id="status" class="status">🔴 Red's turn: Place two successors</p>
+
+  <div class="board-wrapper">
+  <div class="board-container">
+    <!-- Game grid -->
     <div id="gameBoard" class="game-board"></div>
 
-    <button onclick="restartGame()" class="restart-button">🔄 Restart Game</button>
-    <button onclick="undoMove()" class="undo-button">↩️ Undo</button>
+    <!-- 🐻 Bear -->
+    <img src="bear.png" class="character bear-character" alt="Bear">
+
+    <!-- 🐰 Rabbit -->
+    <img src="rabbit.png" class="character rabbit-character" alt="Rabbit">
   </div>
+
+  <svg id="svgOverlay" class="svg-overlay"></svg>
+</div>
+
+
+  <button onclick="restartGame()" class="restart-button">🔄 Reset Game</button>
+  <button onclick="undoMove()" class="undo-button">↩️ Undo</button>
+</div>
 
   <script src="sequence.js"></script>
 </body>

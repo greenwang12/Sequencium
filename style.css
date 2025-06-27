@@ -10,13 +10,14 @@ body {
 }
 
 .container {
+  position: relative;
   text-align: center;
   background: #fffaf0;
   padding: 30px;
   border-radius: 25px;
   box-shadow: 0 8px 20px rgba(0, 0, 0, 0.1);
   max-width: 500px;
-  width: 90%;
+  width: 100%;
 }
 
 .title {
@@ -37,14 +38,6 @@ body {
   color: #333;
 }
 
-.game-board {
-  display: grid;
-  grid-template-columns: repeat(6, 60px);
-  grid-gap: 10px;
-  justify-content: center;
-  margin: 20px 0;
-}
-
 .cell {
   width: 60px;
   height: 60px;
@@ -57,6 +50,7 @@ body {
   font-weight: bold;
   cursor: pointer;
   transition: transform 0.2s;
+  position: relative;
 }
 
 .cell:hover {
@@ -64,54 +58,46 @@ body {
   background-color: #b2ebf2;
 }
 
-.restart-button {
-  background-color: #ff69b4;
-  color: white;
-  border: none;
+.restart-button,
+.undo-button {
+  margin-top: 20px;
   font-size: 1.2rem;
   padding: 10px 20px;
   border-radius: 20px;
   cursor: pointer;
+  border: none;
   transition: background 0.3s;
+}
+
+.restart-button {
+  background-color: #ff69b4;
+  color: white;
 }
 
 .restart-button:hover {
   background-color: #ff85c1;
 }
 
-.red {
-  color: red;
-}
-
-.blue {
-  color: blue;
-}
-
-.red, .blue {
-  font-weight: bold;
-  font-size: 1.6rem;
-}
-
 .undo-button {
   background-color: #ffd54f;
   color: #333;
-  border: none;
-  font-size: 1.2rem;
-  padding: 10px 20px;
-  border-radius: 20px;
-  cursor: pointer;
   margin-left: 10px;
-  transition: background 0.3s;
 }
 
 .undo-button:hover {
   background-color: #ffca28;
 }
 
-.arrow {
-  font-size: 0.9rem;
-  color: #888;
-  margin-left: 3px;
+.red {
+  color: red;
+  font-weight: bold;
+  font-size: 1.6rem;
+}
+
+.blue {
+  color: blue;
+  font-weight: bold;
+  font-size: 1.6rem;
 }
 
 .highlight {
@@ -119,28 +105,111 @@ body {
   cursor: pointer;
 }
 
-/* Dashed arrow overlay like diagonal stroke */
-.arrow-cell {
+.game-board {
+  display: grid;
+  grid-template-columns: repeat(6, 60px);
+  grid-gap: 10px;
+  z-index: 2;
   position: relative;
 }
 
-.arrow-cell::after {
-  content: "";
+.svg-overlay {
   position: absolute;
-  width: 30px;               /* length of the arrow line */
-  height: 0;
-  border-top: 2px dashed currentColor; /* dashed horizontal line */
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%) rotate(45deg); /* rotate to diagonal */
+  top: 0;
+  left: 0;
   pointer-events: none;
+  width: 100%;
+  height: 100%;
+  z-index: 1;
 }
 
-.red.arrow-cell::after {
-  border-color: red;
+.board-wrapper {
+  position: relative;
+  width: fit-content;
+  margin: 0 auto;
 }
 
-.blue.arrow-cell::after {
-  border-color: blue;
+.rules-float {
+  position: absolute;
+  top: 20px;
+  right: 20px;
+  z-index: 1000;
 }
 
+.rules-button {
+  background-color: #60d394;
+  color: white;
+  font-size: 1rem;
+  font-weight: bold;
+  border: none;
+  border-radius: 20px;
+  padding: 10px 18px;
+  cursor: pointer;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.15);
+  transition: background-color 0.3s, transform 0.2s;
+}
+
+.rules-button:hover {
+  background-color: #45b87d;
+  transform: scale(1.05);
+}
+
+.rules-panel {
+  position: absolute;
+  top: 50px;
+  right: 0;
+  background-color: #fffaf0;
+  border-radius: 15px;
+  padding: 15px 20px;
+  box-shadow: 0 6px 16px rgba(0, 0, 0, 0.1);
+  width: 240px;
+  animation: fadeIn 0.3s ease-in-out;
+}
+
+.rules-panel.hidden {
+  display: none;
+}
+
+.rules-panel h3 {
+  margin-top: 0;
+  font-size: 1.2rem;
+  color: #ff4d4d;
+}
+
+.rules-panel ul {
+  padding-left: 20px;
+  text-align: left;
+  margin: 0;
+  font-size: 0.95rem;
+  color: #444;
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(-10px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+.board-container {
+  position: relative;
+  display: inline-block;
+}
+
+.character {
+  position: absolute;
+  width: 80px;
+  height: auto;
+  pointer-events: none;
+  z-index: 10;
+}
+
+/* 🐻 Bear at top-left, clearly visible */
+.bear-character {
+  top: -40px;
+  left: -35px;
+}
+
+/* 🐰 Rabbit at bottom-right, nicely visible */
+.rabbit-character {
+  bottom: -30px;
+  right: -40px;
+}
