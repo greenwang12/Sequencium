@@ -63,6 +63,7 @@ body {
   margin-top: 20px;
   font-size: 1.2rem;
   padding: 10px 20px;
+  font-weight: bold;
   border-radius: 20px;
   cursor: pointer;
   border: none;
@@ -70,22 +71,23 @@ body {
 }
 
 .restart-button {
-  background-color: #ff69b4;
+  background-color: #f4832d;
   color: white;
 }
 
 .restart-button:hover {
-  background-color: #ff85c1;
+  background-color: #f4832d;
 }
 
 .undo-button {
-  background-color: #ffd54f;
-  color: #333;
+  background-color: #f4832d;
+  color:white;
+  font-weight: bold;
   margin-left: 10px;
 }
 
 .undo-button:hover {
-  background-color: #ffca28;
+  background-color: #f4832d;
 }
 
 .red {
@@ -139,11 +141,11 @@ body {
 .rules-button {
   background-color: #f4832d;
   color: white;
-  font-size: 1rem;
+  font-size: 1.2rem;
   font-weight: bold;
   border: none;
   border-radius: 20px;
-  padding: 10px 18px;
+  padding: 10px 20px;
   cursor: pointer;
   box-shadow: 0 4px 10px rgba(0, 0, 0, 0.15);
   transition: background-color 0.3s, transform 0.2s;
