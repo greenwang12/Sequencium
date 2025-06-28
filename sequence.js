@@ -204,7 +204,7 @@ function drawPaths() {
       line.setAttribute("y2", y2);
       line.setAttribute("stroke", color);
       line.setAttribute("stroke-width", "3");
-      line.setAttribute("stroke-dasharray", "5,5");
+     // line.setAttribute("stroke-dasharray", "5,5");
 
       svg.appendChild(line);
     }
