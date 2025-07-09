@@ -215,3 +215,10 @@ body {
   bottom: -30px;
   right: -40px;
 }
+
+* {
+  user-select: none;
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+}

@@ -90,10 +90,20 @@ function handleClick(e) {
     clearHighlights();
 
     currentPlayer = currentPlayer === 'red' ? 'blue' : 'red';
-    updateStatus();
-    drawPaths();
 
-    if (isBoardFull()) checkWinner();
+  // Skip turns if the next player has no valid moves
+  while (!hasValidMoves(currentPlayer) && !isBoardFull()) {
+    statusP.textContent = `${capitalize(currentPlayer)} has no valid moves! Skipping turn...`;
+    currentPlayer = currentPlayer === 'red' ? 'blue' : 'red';
+  }
+
+  updateStatus();
+  drawPaths();
+
+  if (isBoardFull()) {
+     checkWinner();
+  }
+
     return;
   }
 
@@ -222,4 +232,17 @@ function toggleRules() {
   panel.classList.toggle('hidden');
 }
 
-
+function hasValidMoves(player) {
+  for (let i = 0; i < 6; i++) {
+    for (let j = 0; j < 6; j++) {
+      const cell = board[i][j];
+      if (cell.owner === player) {
+        const neighbors = getValidEmptyNeighbors(i, j);
+        if (neighbors.length > 0) {
+          return true;
+        }
+      }
+    }
+  }
+  return false;
+}
